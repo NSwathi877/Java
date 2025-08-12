@@ -1,10 +1,27 @@
 package Colour;
+import java.util.Random;
 
-public class ColourTask {
+class ColourTask implements Runnable {
+    String[] colours = {"white", "blue", "black", "green", "red", "yellow"};
+    Random rand = new Random();
+    
+    public void run() {
+        while (true) {
+            int index = rand.nextInt(colours.length);
+            String selectedColour = colours[index];
+            System.out.println("Selected Colour: " + selectedColour);
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+            if (selectedColour.equals("red")) {
+                System.out.println("Red colour matched. Stopping display.");
+                break;
+            }
 
-	}
-
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                System.out.println("Thread interrupted.");
+            }
+        }
+    }
 }
+
